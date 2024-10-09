@@ -1,0 +1,60 @@
+// .env.local
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=key
+CLERK_SECRET_KEY=key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+
+
+npm i @clerk/nextjs
+
+app/layout.tsx
+import { ClerkProvider } from '@clerk/nextjs'
+ 				<ClerkProvider
+            appearance={{
+              elements: {
+                formButtonPrimary: 'primary-gradient',
+                footerActionLink: 'primary-text-gradient hover:text-primary-500'
+              }
+            }}
+          >
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+          </ClerkProvider>
+
+// middleware.ts
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+
+const isProtectedRoute = createRouteMatcher(["/ask-question(.*)"])
+
+export default clerkMiddleware((auth, req)=>{
+  if(isProtectedRoute(req)) auth().protect()
+})
+
+export const config = {
+  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+};
+ 
+app/sign-up/[[...sign-up]]/page.tsx
+import { SignUp } from "@clerk/nextjs";
+export default function Page() {
+  return <SignUp />;
+}
+
+app/sign-in/[[...sign-in]]/page.tsx
+import { SignIn } from "@clerk/nextjs";
+export default function Page() {
+  return <SignIn />;
+}
+
+app/page.tsx
+import { UserButton } from "@clerk/nextjs";
+export default function Home() {
+  return (
+    <div>
+      <UserButton afterSignOutUrl="/" />
+    </div>
+  )
+}
+

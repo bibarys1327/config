@@ -1,0 +1,60 @@
+npm install eslint-config-standard eslint-plugin-tailwindcss eslint-config-prettier prettier 
+
+// .eslintrc.json
+{
+  "extends": ["next/core-web-vitals", "standard", "plugin:tailwindcss/recommended", "prettier"]
+}
+
+// for test 
+npm run lint
+
+
+// Setting things up for VSCode  (user settings) "settings.json" 
+{
+	// Eslint Setup
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.addMissingImports": true
+	},
+	 "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+	// Prettier Setup
+	"prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.semi": true,
+  "prettier.singleQuote": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.trailingComma": "es5",
+  "prettier.arrowParens": "always",
+}
+
+
+// React.js Setup {
+// Remove the .eslintrc.cjs file at the root of the project and replace it with a .eslintrc.json file with the following content:
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+	"rules": {
+    "max-len": [2, 250],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "object-curly-newline": 0
+	  }
+}
+
+// Install the required packages 
+npm install eslint-config-standard eslint-plugin-tailwindcss eslint-config-prettier
+}

@@ -1,0 +1,18 @@
+// app/layout.tsx
+import '../styles/prism.css'
+import './globals.css'
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: 'DevFlow',
+  description: 'A community',
+  icons: {
+    icon: '/assets/images/site-logo.svg'
+  }
+}
+
+// context/ThemeProvider
+interface ThemeContextType {
+  mode: string;
+  setMode: (mode: string) => void;
+}
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);

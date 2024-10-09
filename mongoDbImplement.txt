@@ -1,0 +1,22 @@
+// .env.local
+MONGODB_URL=mongodb+srv://name:<password>
+npm i mongoose mongodb
+// lib/mongoose.ts
+import mongoose from 'mongoose';
+let isConnected: boolean = false;
+export const connectToDatabase = async () => {
+  mongoose.set('strictQuery', true);
+  if(!process.env.MONGODB_URL) {return console.log('MISSING MONGODB_URL');}
+  if (isConnected) {return;}
+  try {await mongoose.connect(process.env.MONGODB_URL, { dbName: 'devflow'})
+	isConnected = true;
+    console.log('MongoDB is connected');
+  } catch (error) {console.log('MongoDB connection failed', error)}}
+
+// lib/actions/question.action.ts
+"use server"
+export async function createQuestion(params: CreateQuestionParams) {
+	try {connectToDatabase()}     catch (error) { console.log(error); }}
+
+// call the action in any component:
+		await createQuestion({})

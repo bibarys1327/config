@@ -1,0 +1,9 @@
+app
+components/(home) & (shared/navbar & search ) & (ui)
+constants/index.ts & filters.ts
+context/ThemeProvider.tsx
+lib/actions/answer.action.ts
+database/answer.model.ts
+styles/theme.css 
+types/index.d.ts  // export interface I {}
+.env.local
